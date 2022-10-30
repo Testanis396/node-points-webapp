@@ -3,6 +3,12 @@ Points web-service that adds transactions, spends points, and returns balances.
 Server on localhost:(env.port or 8080).
 Takes json input in body of request. 
 
+Operations:
+- GET /transactions => returns list of all transactions
+- POST /transactions => add transaction { "payer": string, "points": integer, "timestamp": yyyy-mm-ddThh:mm:ssZ }
+- POST /spend => spend points{ "points": integer }, returns list of points spent { "payer": string, "points": integer }
+- GET /balance => returns total balances { "payer": string, "points": integer }
+
 Works with Given Examples:
 
 /transactions
