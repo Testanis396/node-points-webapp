@@ -1,4 +1,4 @@
-# node-points-webapp
+# node-points-webapp-v1
 Points web-service that adds transactions, spends points, and returns balances.
 Server on localhost:(env.port or 8080).
 Takes json input in body of request. 
