@@ -1,0 +1,48 @@
+Points.Js express
+
+POST/transactions - req body json - 
+{"payer":name, "points":number, "timestamp":date}
+
+(POST) (req, res)
+Insert transaction into master-list 
+Have a running total for Balance hash-map?
+if (Points > 0): insert into spend-list 
+    newT = Transaction(req);
+    points = newT.points
+________
+(GET)
+Return Balance (Hash-map?)
+________
+(POST) Spend points
+while (balance >= points) {
+    for element in spend-list {
+        //(Spend points and update)
+        current = element.points
+        dif = current - points
+        if (dif > 0) {
+            POST(new transaction(
+            element.payer, -points, timestamp))
+            Write ^^^^
+            // update current spend-list point                element.points = dif 
+            return 
+        }
+        else {
+            POST(new transaction(                element.payer, -current, timestamp))
+            Write^^^^
+            //remove current spend-list element
+            spend-list.delete(element)
+            points = +(dif)
+            Continue; 
+        }
+    }
+}
+
+Given Examples:
+       
+{ "payer": "DANNON", "points": 300, "timestamp": "2022-10-31T10:00:00Z" }
+{ "payer": "UNILEVER", "points": 200, "timestamp": "2022-10-31T11:00:00Z" }
+{ "payer": "DANNON", "points": -200, "timestamp": "2022-10-31T15:00:00Z" }
+{ "payer": "MILLER COORS", "points": 10000, "timestamp": "2022-11-01T14:00:00Z" }
+{ "payer": "DANNON", "points": 1000, "timestamp": "2022-11-02T14:00:00Z" }
+{ "points": 5000 }
+
