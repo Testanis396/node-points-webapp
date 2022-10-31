@@ -1,15 +1,8 @@
+const compare = require("./module-compare");
+
 function spendPayer (account, payer, points) {
     // spends points and deducts from only payer balances.
     // sort account by timestamp, loop through and spend payer points.
-    function compare (a, b) {
-        if ( a.timestamp < b.timestamp ){
-            return -1;
-        }
-        if ( a.timestamp > b.timestamp ){
-            return 1;
-        }
-        return 0;
-    }
     
     account.sort(compare);
     

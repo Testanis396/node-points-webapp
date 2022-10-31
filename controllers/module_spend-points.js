@@ -1,4 +1,5 @@
 const transaction = require("./module_transaction");
+const compare = require("./module-compare");
 
 class Payer {
     
@@ -12,17 +13,7 @@ function spendPoints (account, points, bal) {
     // returns a list of spent points {"payer","points"}.
     // sorts account by timestamp. loop through, spend points, update individual and total balances.
     let ret = new Array();
-    
-    function compare (a, b) {
-        if ( a.timestamp < b.timestamp ){
-            return -1;
-        }
-        if ( a.timestamp > b.timestamp ){
-            return 1;
-        }
-        return 0;
-    }
-    
+
     account.sort(compare);
     
     //for all transactions where balance is positive,
