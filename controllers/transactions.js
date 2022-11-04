@@ -41,7 +41,36 @@ const createTransaction = (req, res) => {
         }
         let newT = new transaction(payer, points, timestamp);
         acc.push(newT);   
-        res.json({message: "transaction added ..."});
+        res.json({message: `transaction added ... id = ${newT.id}`});
+    }
+    catch(err){
+        console.error(err);
+        res.status(500).json("something went wrong");
+    }
+}
+
+const getTransaction = (req, res) => {
+    //respond with transaction history
+    //res.write("your transaction history is ...");
+    try { 
+        const id = req.params.id; 
+        let account = req.app.get('account');
+        let transaction = account.find(x => x.id == id);
+        res.json((transaction) ? JSON.stringify(transaction) : {message: "id not found ..."})      
+    }
+    catch(err){
+        console.error(err);
+        res.status(500).json("something went wrong");
+    }
+}
+
+const patchTransaction = (req, res) => {
+    //respond with transaction history
+    //res.write("your transaction history is ...");
+    try {   
+        const id = req.params.id;   
+        //let history = req.app.get('account');
+        //res.json(JSON.stringify(history));
     }
     catch(err){
         console.error(err);
@@ -89,6 +118,8 @@ const updatePoints = (req, res) => {
 module.exports = {
     getAllTransactions,
     createTransaction,
+    getTransaction,
+    patchTransaction,
     getPoints,
     updatePoints,
 }

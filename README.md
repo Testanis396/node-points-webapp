@@ -6,10 +6,10 @@ Takes json input in body of request.
 Operations:
 - GET /api => creates account
 - GET /api/transactions => returns list of all transactions
-- POST /api/transactions => add transaction { "payer": string, "points": integer, "timestamp": yyyy-mm-ddThh:mm:ssZ }
+- POST /api/transactions => add transaction { "payer": string, "points": integer, "timestamp": yyyy-mm-ddThh:mm:ssZ } returns id
 - GET /api/transactions/points => returns total balances { "payer": string, "points": integer }
 - POST /api/transactions/points => spend points{ "points": integer }, returns list of points spent { "payer": string, "points": integer }
-
+- GET /api/transactions/:id => returns transaction with id == :id 
 Works with Given Examples:
 
 /api/transactions
@@ -24,6 +24,4 @@ Works with Given Examples:
 - GET 
 
 To do: 
-- try/catch err handling
 - app.delete, app.patch
-- allow multiple transactions per /transactions GET req
