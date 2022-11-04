@@ -10,6 +10,7 @@ Operations:
 - GET /api/transactions/points => returns total balances { "payer": string, "points": integer }
 - POST /api/transactions/points => spend points{ "points": integer }, returns list of points spent { "payer": string, "points": integer }
 - GET /api/transactions/:id => returns transaction with id == :id 
+
 Works with Given Examples:
 
 /api/transactions
