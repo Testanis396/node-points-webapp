@@ -4,9 +4,8 @@ const spendPoints = require("./module_spend-points");
 
 const getAllTransactions = (req, res) => {
     //respond with transaction history
-    //res.write("your transaction history is ...");
     try {    
-        let history = req.app.get('account');
+        let history = req.app.get("account");
         res.json(JSON.stringify(history));
     }
     catch(err){
@@ -20,10 +19,15 @@ const createTransaction = (req, res) => {
     let payer = req.body.payer;
     let points = req.body.points;
     let timestamp = req.body.timestamp;
+    if (!payer || !points || !timestamp) {
+        res.status(400).json({
+            message: "Invalid transaction, missing fields {payer, points, timestamp}"});
+        return;
+    }
     try {
-        let bal = req.app.get('balance');
+        let bal = req.app.get("balance");
         let cur = (bal.has(payer)) ? bal.get(payer):0;
-        let acc = req.app.get('account');
+        let acc = req.app.get("account");
         if (points > 0) {
             //if points are earned add to bal
             bal.set(payer, cur + points);  
@@ -41,7 +45,7 @@ const createTransaction = (req, res) => {
         }
         let newT = new transaction(payer, points, timestamp);
         acc.push(newT);   
-        res.json({message: `transaction added ... id = ${newT.id}`});
+        res.status(200).json({id : newT.id});
     }
     catch(err){
         console.error(err);
@@ -50,11 +54,10 @@ const createTransaction = (req, res) => {
 }
 
 const getTransaction = (req, res) => {
-    //respond with transaction history
-    //res.write("your transaction history is ...");
+    //respond with transaction with params.id
     try { 
         const id = req.params.id; 
-        let account = req.app.get('account');
+        let account = req.app.get("account");
         let transaction = account.find(x => x.id == id);
         res.json((transaction) ? JSON.stringify(transaction) : {message: "id not found ..."})      
     }
@@ -65,11 +68,21 @@ const getTransaction = (req, res) => {
 }
 
 const patchTransaction = (req, res) => {
-    //respond with transaction history
-    //res.write("your transaction history is ...");
-    try {   
-        const id = req.params.id;   
-        //let history = req.app.get('account');
+    //update and respond transaction with params.id
+    try {/*   
+        const id = req.params.id; 
+        let account = req.app.get("account");
+        let transaction = account.find(x => x.id == id);
+        if (!transaction) res.json({message: "id not found ..."});
+        const {newPayer, newPoints, newTimestamp} = req.body;
+        const points = transaction;
+        transaction.payer = newPayer;
+        transaction.points = newPoints;
+        transaction.timestamp = newTimestamp;
+        
+        
+        */
+        //let history = req.app.get("account");
         //res.json(JSON.stringify(history));
     }
     catch(err){
@@ -81,7 +94,7 @@ const patchTransaction = (req, res) => {
 const getPoints = (req, res) => {
     //respond with current total points balance
     try {  
-        res.json(JSON.stringify(Array.from(req.app.get('balance'))));
+        res.json(JSON.stringify(Array.from(req.app.get("balance"))));
     }
     catch(err){
         console.error(err);
@@ -93,8 +106,8 @@ const updatePoints = (req, res) => {
     //respond with list of new negative transactions
     let points = req.body.points * -1;
     try {
-        let bal = req.app.get('balance');
-        let acc = req.app.get('account');
+        let bal = req.app.get("balance");
+        let acc = req.app.get("account");
         let sum = 0;
         let ret = [];
         bal.forEach(value => {

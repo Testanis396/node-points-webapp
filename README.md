@@ -1,10 +1,13 @@
-# node-points-webapp-v1
+# node-points-webapp-v2
 Points web-service that adds transactions, spends points, and returns balances.
 Server on localhost:(env.port or 8080).
 Takes json input in body of request. 
+Uses server.js for production and app.test.js for tests {jest, supertest}
+user % npm start 
+user % npm test 
 
 Operations:
-- GET /api => creates account
+- POST /api => creates account
 - GET /api/transactions => returns list of all transactions
 - POST /api/transactions => add transaction { "payer": string, "points": integer, "timestamp": yyyy-mm-ddThh:mm:ssZ } returns id
 - GET /api/transactions/points => returns total balances { "payer": string, "points": integer }
@@ -25,4 +28,5 @@ Works with Given Examples:
 - GET 
 
 To do: 
+- continue tests
 - app.delete, app.patch
