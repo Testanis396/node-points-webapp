@@ -201,3 +201,30 @@ describe("GET /api/transactions/:id", () => {
     })
 })
 
+describe("Given Examples", () => {
+    const bodyData = [
+        { payer: "DANNON", points: 300, timestamp: "2022-10-31T10:00:00Z" },
+        { payer: "UNILEVER", points: 200, timestamp: "2022-10-31T11:00:00Z" },
+        { payer: "DANNON", points: -200, timestamp: "2022-10-31T15:00:00Z" },
+        { payer: "MILLER COORS", points: 10000, timestamp: "2022-11-01T14:00:00Z" },
+        { payer: "DANNON", points: 1000, timestamp: "2022-11-02T14:00:00Z" }
+    ]
+    const body = { points: 5000 };
+    beforeAll(async () => {
+        for (const body of bodyData) {
+            const response = await request(app).post("/api/transactions").send(body);
+        }
+    })
+    afterAll(async () => {
+        await request(app).post("/api").send();
+    })
+    test("respond with status 200", async () => {
+        for (let id = 1; id <= 5; id++) {
+            const response1 = await request(app).post("/api/transactions/points").send(body);
+            expect(response1.statusCode).toBe(200);
+            const response2 = await request(app).get("/api/transactions/points");
+            expect(response2.statusCode).toBe(200);
+        }
+    })
+})
+
