@@ -3,7 +3,9 @@ Points web-service that adds transactions, spends points, and returns balances.
 Server on localhost:(env.port or 8080).
 Takes json input in body of request. 
 Uses server.js for production and app.test.js for tests {jest, supertest}
+
 user % npm start 
+
 user % npm test 
 
 Operations:
@@ -59,7 +61,7 @@ To do:
     given correct id
       ✓ respond with status 200 (6 ms)
       ✓ json in content type header (8 ms)
-      ✓ respond with transactons/:id (7 ms)
+      ✓ respond with transactions/:id (7 ms)
     given incorrect id
       ✓ respond with status 404 (14 ms)
 

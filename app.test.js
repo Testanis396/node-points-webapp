@@ -167,7 +167,7 @@ describe("GET /api/transactions/:id", () => {
                 expect(response.headers['content-type']).toEqual(expect.stringContaining("json"));
             }
         })
-        test("respond with transactons/:id", async () => {
+        test("respond with transactions/:id", async () => {
             for (let id = 1; id <= 5; id++) {
                 const response = await request(app).get(`/api/transactions/${id}`);
                 expect(response.body.id == id).toBe(true);
