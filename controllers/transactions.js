@@ -6,7 +6,7 @@ const getAllTransactions = (req, res) => {
     //respond with transaction history
     try {    
         let history = req.app.get("account");
-        res.json(JSON.stringify(history));
+        res.status(200).json(JSON.stringify(history));
     }
     catch(err){
         console.error(err);
@@ -22,7 +22,7 @@ const createTransaction = (req, res) => {
     if (!payer || !points || !timestamp) {
         res.status(400).json({
             message: "Invalid transaction, missing fields {payer, points, timestamp}"});
-        return;
+        return
     }
     try {
         let bal = req.app.get("balance");
@@ -45,7 +45,7 @@ const createTransaction = (req, res) => {
         }
         let newT = new transaction(payer, points, timestamp);
         acc.push(newT);   
-        res.status(200).json({id : newT.id});
+        res.status(201).json({id : newT.id});
     }
     catch(err){
         console.error(err);
@@ -59,7 +59,7 @@ const getTransaction = (req, res) => {
         const id = req.params.id; 
         let account = req.app.get("account");
         let transaction = account.find(x => x.id == id);
-        res.json((transaction) ? JSON.stringify(transaction) : {message: "id not found ..."})      
+        (transaction) ? res.status(200).json(transaction) : res.status(404).json({message: "id not found ..."});      
     }
     catch(err){
         console.error(err);
@@ -94,7 +94,8 @@ const patchTransaction = (req, res) => {
 const getPoints = (req, res) => {
     //respond with current total points balance
     try {  
-        res.json(JSON.stringify(Array.from(req.app.get("balance"))));
+        //res.json(JSON.stringify(Array.from(req.app.get("balance"))));
+        res.status(200).json(Array.from(req.app.get("balance")));
     }
     catch(err){
         console.error(err);
@@ -120,7 +121,7 @@ const updatePoints = (req, res) => {
         else {
             res.json({message: "Invalid transaction, points exceeds total balance"});
         }
-        res.json(JSON.stringify(Array.from(ret))); 
+        res.status(200).json(ret); 
     }
     catch(err){
         console.error(err);

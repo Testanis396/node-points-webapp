@@ -30,3 +30,40 @@ Works with Given Examples:
 To do: 
 - continue tests
 - app.delete, app.patch
+
+% npm test
+
+ PASS  ./app.test.js
+  POST /api
+    ✓ create account (14 ms)
+  POST /api/transactions
+    given payer, points, and timestamp
+      ✓ respond with status 201 (12 ms)
+      ✓ json in content type header (3 ms)
+      ✓ response has id (3 ms)
+    missing payer, points, and timestamp
+      ✓ respond with status 400 (24 ms)
+  GET /api/transactions
+    ✓ respond with status 200 (3 ms)
+    ✓ json in content type header (2 ms)
+    ✓ respond with transactions (2 ms)
+  GET /api/transactions/points
+    ✓ respond with status 200 (1 ms)
+    ✓ json in content type header (3 ms)
+    ✓ respond with balance (3 ms)
+  POST /api/transactions/points
+    ✓ respond with status 200 (10 ms)
+    ✓ json in content type header (13 ms)
+    ✓ respond with new negative transactions (10 ms)
+  GET /api/transactions/:id
+    given correct id
+      ✓ respond with status 200 (6 ms)
+      ✓ json in content type header (8 ms)
+      ✓ respond with transactons/:id (7 ms)
+    given incorrect id
+      ✓ respond with status 404 (14 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       18 passed, 18 total
+Snapshots:   0 total
+Time:        0.396 s, estimated 1 s
