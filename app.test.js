@@ -219,12 +219,10 @@ describe("Given Examples", () => {
         await request(app).post("/api").send();
     })
     test("respond with status 200", async () => {
-        for (let id = 1; id <= 5; id++) {
-            const response1 = await request(app).post("/api/transactions/points").send(body);
-            expect(response1.statusCode).toBe(200);
-            const response2 = await request(app).get("/api/transactions/points");
-            expect(response2.statusCode).toBe(200);
-        }
+        const response1 = await request(app).post("/api/transactions/points").send(body);
+        expect(response1.statusCode).toBe(200);
+        const response2 = await request(app).get("/api/transactions/points");
+        expect(response2.statusCode).toBe(200);
     })
 })
 

@@ -38,37 +38,39 @@ To do:
 ```
  PASS  ./app.test.js
   POST /api
-    ✓ create account (13 ms)
+    ✓ create account (20 ms)
   POST /api/transactions
     given payer, points, and timestamp
-      ✓ respond with status 201 (18 ms)
-      ✓ json in content type header (10 ms)
-      ✓ response has id (3 ms)
+      ✓ respond with status 201 (15 ms)
+      ✓ json in content type header (3 ms)
+      ✓ response has id (2 ms)
     missing payer, points, and timestamp
-      ✓ respond with status 400 (17 ms)
+      ✓ respond with status 400 (19 ms)
   GET /api/transactions
     ✓ respond with status 200 (2 ms)
-    ✓ json in content type header (2 ms)
+    ✓ json in content type header (3 ms)
     ✓ respond with transactions (2 ms)
   GET /api/transactions/points
-    ✓ respond with status 200 (2 ms)
+    ✓ respond with status 200 (3 ms)
     ✓ json in content type header (2 ms)
-    ✓ respond with balance (3 ms)
+    ✓ respond with balance (1 ms)
   POST /api/transactions/points
-    ✓ respond with status 200 (10 ms)
-    ✓ json in content type header (9 ms)
-    ✓ respond with new negative transactions (10 ms)
+    ✓ respond with status 200 (12 ms)
+    ✓ json in content type header (12 ms)
+    ✓ respond with new negative transactions (12 ms)
   GET /api/transactions/:id
     given correct id
-      ✓ respond with status 200 (7 ms)
-      ✓ json in content type header (7 ms)
-      ✓ respond with transactions/:id (8 ms)
+      ✓ respond with status 200 (9 ms)
+      ✓ json in content type header (17 ms)
+      ✓ respond with transactions/:id (20 ms)
     given incorrect id
-      ✓ respond with status 404 (14 ms)
+      ✓ respond with status 404 (15 ms)
+  Given Examples
+    ✓ respond with status 200 (3 ms)
 
 Test Suites: 1 passed, 1 total
-Tests:       18 passed, 18 total
+Tests:       19 passed, 19 total
 Snapshots:   0 total
-Time:        0.741 s, estimated 1 s
+Time:        0.713 s, estimated 1 s
 Ran all test suites.
 ```
